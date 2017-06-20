@@ -58,14 +58,14 @@ public class LoginController implements Initializable, ControlledScreen {
             }
             if (found&&encPass.equals(pass)) {
                 goToManagerScreen();
-//                notification = new TrayNotification("Welcome", "Logged in successfuly", NotificationType.SUCCESS);
-//                notification.setAnimationType(AnimationType.POPUP);
-//                notification.showAndDismiss(Duration.seconds(3));
+                notification = new TrayNotification("Welcome", "Logged in successfuly", NotificationType.SUCCESS);
+                notification.setAnimationType(AnimationType.POPUP);
+                notification.showAndDismiss(Duration.seconds(3));
                 System.out.println("Hello\n");
             }else{
-//                notification = new TrayNotification("Wrong", "username or password", NotificationType.ERROR);
-//                notification.setAnimationType(AnimationType.POPUP);
-//                notification.showAndDismiss(Duration.seconds(3));
+                notification = new TrayNotification("Wrong", "username or password", NotificationType.ERROR);
+                notification.setAnimationType(AnimationType.POPUP);
+                notification.showAndDismiss(Duration.seconds(3));
                 System.out.println("Try again\n");
             }
         } catch (SQLException ex) {
@@ -108,9 +108,4 @@ public class LoginController implements Initializable, ControlledScreen {
        myController.setScreen(PharmacyManagementSystem.managerID);
     }
     
-//    @FXML
-//    private void goToEmployeeScreen(){
-//       myController.setScreen(PharmacyManagementSystem.employeeID);
-//    }
-
 }

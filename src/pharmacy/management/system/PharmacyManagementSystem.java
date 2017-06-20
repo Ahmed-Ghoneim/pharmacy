@@ -20,11 +20,11 @@ import javafx.stage.Stage;
 //background  #5fc5fc
 public class PharmacyManagementSystem extends Application {
     
-    public static String loginID = "main";
+    public static String loginID = "login";
     public static String loginFile = "Login.fxml";
-    public static String managerID = "screen2";
+    public static String managerID = "manager";
     public static String managerFile = "Manager.fxml";
-    public static String employeeID = "screen3";
+    public static String employeeID = "employee";
     public static String employeeFile = "Employee.fxml";
     
     static Stage stage;
@@ -37,7 +37,7 @@ public class PharmacyManagementSystem extends Application {
         mainContainer.loadScreen(PharmacyManagementSystem.managerID, PharmacyManagementSystem.managerFile);
 //        mainContainer.loadScreen(PharmacyManagementSystem.employeeID, PharmacyManagementSystem.employeeFile);
         
-        mainContainer.setScreen(PharmacyManagementSystem.loginID);
+        mainContainer.setScreen(PharmacyManagementSystem.managerID);
         
         Group root = new Group();
         root.getChildren().addAll(mainContainer);
