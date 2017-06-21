@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.util.Duration;
 import tray.animations.AnimationType;
 import tray.notification.NotificationType;
@@ -39,35 +40,46 @@ public class LoginController implements Initializable, ControlledScreen {
 
     @FXML
     private void login() throws Exception {
+        String employeeName = "";
+        String user = "";
         String encPass = encryption.encrypt(password.getText());
+        String email = "";
+        String imageLink = "";
         try {
-            boolean found = false;
+            boolean logged = false;
             String pass = "";
             stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT username, email, password FROM employees;");
+            ResultSet rs = stmt.executeQuery("SELECT name, username, email, image, password FROM employees;");
             
             while (rs.next()) {
-                String user = rs.getString("username");
-                String email = rs.getString("email");
+                user = rs.getString("username");
+                email = rs.getString("email");
+                pass = rs.getString("password");
                 
-                if ((username.getText().equals(user) || username.getText().equals(email))) {
-                    found = true;
-                    pass = rs.getString("password");
+                //Login success
+                if ((username.getText().equals(user) || username.getText().equals(email)) && encPass.equals(pass)) {
+                    logged = true;
+                    employeeName = rs.getString("name");
+                    imageLink = rs.getString("image");
+                    System.out.println("link: " + imageLink);
+                    notification = new TrayNotification("Welcome", "Logged in successfuly", NotificationType.SUCCESS);
+                    notification.setAnimationType(AnimationType.POPUP);
+                    notification.showAndDismiss(Duration.seconds(3));
+                    System.out.println("Hello\n");
+                    goToManagerScreen(rs.getString("name"), user, new Image(imageLink));
+                    username.clear();
+                    password.clear();
                     break;
                 }
             }
-            if (found&&encPass.equals(pass)) {
-                goToManagerScreen();
-                notification = new TrayNotification("Welcome", "Logged in successfuly", NotificationType.SUCCESS);
-                notification.setAnimationType(AnimationType.POPUP);
-                notification.showAndDismiss(Duration.seconds(3));
-                System.out.println("Hello\n");
-            }else{
+
+            if(!logged){
                 notification = new TrayNotification("Wrong", "username or password", NotificationType.ERROR);
                 notification.setAnimationType(AnimationType.POPUP);
                 notification.showAndDismiss(Duration.seconds(3));
                 System.out.println("Try again\n");
             }
+            
         } catch (SQLException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -104,7 +116,11 @@ public class LoginController implements Initializable, ControlledScreen {
     }
     
     @FXML
-    private void goToManagerScreen(){
+    private void goToManagerScreen(String name, String username, Image image){
+        ManagerController.name = name;
+        ManagerController.username = username;
+        ManagerController.image = image;
+        PharmacyManagementSystem.mainContainer.loadScreen(PharmacyManagementSystem.managerID, PharmacyManagementSystem.managerFile);
        myController.setScreen(PharmacyManagementSystem.managerID);
     }
     

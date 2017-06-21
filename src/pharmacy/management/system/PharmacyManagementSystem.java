@@ -27,17 +27,15 @@ public class PharmacyManagementSystem extends Application {
     public static String employeeID = "employee";
     public static String employeeFile = "Employee.fxml";
     
-    static Stage stage;
+    static ScreensController mainContainer;
     
     @Override
     public void start(Stage stage) throws Exception {
         
-        ScreensController mainContainer = new ScreensController();
+        mainContainer = new ScreensController();
         mainContainer.loadScreen(PharmacyManagementSystem.loginID, PharmacyManagementSystem.loginFile);
-        mainContainer.loadScreen(PharmacyManagementSystem.managerID, PharmacyManagementSystem.managerFile);
-//        mainContainer.loadScreen(PharmacyManagementSystem.employeeID, PharmacyManagementSystem.employeeFile);
         
-        mainContainer.setScreen(PharmacyManagementSystem.managerID);
+        mainContainer.setScreen(PharmacyManagementSystem.loginID);
         
         Group root = new Group();
         root.getChildren().addAll(mainContainer);

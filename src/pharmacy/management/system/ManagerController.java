@@ -13,6 +13,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
 /**
@@ -28,6 +30,9 @@ public class ManagerController implements Initializable, ControlledScreen {
      */
     
     private ScreensController myController;
+    static String name;
+    static String username;
+    static Image image;
     
     @FXML
     private TextField searchBox;
@@ -43,6 +48,9 @@ public class ManagerController implements Initializable, ControlledScreen {
 
     @FXML
     private Label employeeUsername;
+    
+    @FXML
+    private ImageView employeeImage;
     
     
     @FXML
@@ -125,12 +133,18 @@ public class ManagerController implements Initializable, ControlledScreen {
 
     }
     
+     @FXML
+    void goToLogin(ActionEvent event) {
+        myController.setScreen(PharmacyManagementSystem.loginID);
+    }
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        employeeName.setText("Ahmed AboRahma");
-        employeeUsername.setText("root");
+        employeeName.setText(name);
+        employeeUsername.setText(username);
+        employeeImage.setImage(image);
     }    
     
     @Override
@@ -138,13 +152,4 @@ public class ManagerController implements Initializable, ControlledScreen {
         myController = screenParent;
     }
 
-//    
-//    private void goToScreen1(){
-//       myController.setScreen(ScreensFramework.screen1ID);
-//    }
-//    
-//    private void goToScreen3(ActionEvent event){
-//       myController.setScreen(ScreensFramework.screen3ID);
-//    }
-    
 }

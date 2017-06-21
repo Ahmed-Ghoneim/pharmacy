@@ -45,7 +45,7 @@
             <Region prefHeight="90.0" prefWidth="191.0" HBox.hgrow="ALWAYS" />
             <HBox spacing="3.0">
                <children>
-                  <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true">
+                  <ImageView fx:id="employeeImage" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true">
                      <image>
                         <Image url="file:/E:/Photos/images/16640898_10158199274305065_9087395082119477122_n.jpg" />
                      </image>
@@ -71,7 +71,7 @@
                   </VBox>
                   <MenuButton alignment="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="32.0" style="-fx-background-radius: 0;" textAlignment="CENTER">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="Log out" />
+                        <MenuItem mnemonicParsing="false" onAction="#goToLogin" text="Log out" />
                      </items>
                      <font>
                         <Font size="12.0" />
