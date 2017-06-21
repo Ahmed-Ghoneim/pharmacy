@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pharmacy.management.system;
 
 import java.net.URL;
@@ -12,54 +7,52 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import static pharmacy.management.system.ManagerController.name;
 
-/**
- * FXML Controller class
- *
- * @author Ahmed
- */
-
-public class ManagerController implements Initializable, ControlledScreen {
-
-    /**
-     * Initializes the controller class.
-     */
+public class EmployeeController implements Initializable, ControlledScreen {
     
     private ScreensController myController;
     static String name;
     static String username;
     static Image image;
-    
-    @FXML
-    private TextField searchBox;
-    
-    @FXML
-    private Button newInvoice;
-    
+
     @FXML
     private VBox pane;
-    
+
+    @FXML
+    private TextField searchBox;
+
+    @FXML
+    private TableColumn<?, ?> medicineName;
+
+    @FXML
+    private TableColumn<?, ?> medicinePrice;
+
+    @FXML
+    private TableColumn<?, ?> medicineQuantity;
+
+    @FXML
+    private TableColumn<?, ?> medicineEffectiveIngredient;
+
+    @FXML
+    private ImageView employeeImage;
+
     @FXML
     private Label employeeName;
 
     @FXML
     private Label employeeUsername;
-    
+
     @FXML
-    private ImageView employeeImage;
-    
-    
+    private Button newInvoice;
+
     @FXML
     void GoToNotExist(ActionEvent event) {
-
-    }
-
-    @FXML
-    void goToAddEmployee(ActionEvent event) {
 
     }
 
@@ -79,11 +72,6 @@ public class ManagerController implements Initializable, ControlledScreen {
     }
 
     @FXML
-    void goToEditEmployee(ActionEvent event) {
-
-    }
-
-    @FXML
     void goToEditMedicine(ActionEvent event) {
 
     }
@@ -99,8 +87,10 @@ public class ManagerController implements Initializable, ControlledScreen {
     }
 
     @FXML
-    void goToMonthProfit(ActionEvent event) {
-
+    void goToLogin(ActionEvent event) {
+        
+        myController.setScreen(PharmacyManagementSystem.loginID);
+    
     }
 
     @FXML
@@ -123,42 +113,16 @@ public class ManagerController implements Initializable, ControlledScreen {
 
     }
 
-    @FXML
-    void goToTotalInPrice(ActionEvent event) {
-
-    }
-
-    @FXML
-    void goToTotalOutPrice(ActionEvent event) {
-
-    }
-    
-    @FXML
-    void goToShowAllInvoices(ActionEvent event) {
-
-    }
-    
-     @FXML
-    void goToShowAllEmployees(ActionEvent event) {
-
-    }
-    
-     @FXML
-    void goToLogin(ActionEvent event) {
-        myController.setScreen(PharmacyManagementSystem.loginID);
-    }
-    
-    
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+    public void initialize(URL location, ResourceBundle resources) {
+        
         employeeName.setText(name);
         employeeUsername.setText(username);
         employeeImage.setImage(image);
-    }    
-    
+    }
+
     @Override
-    public void setScreenParent(ScreensController screenParent){
+    public void setScreenParent(ScreensController screenParent) {
         myController = screenParent;
     }
 

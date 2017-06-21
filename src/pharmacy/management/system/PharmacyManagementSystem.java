@@ -46,7 +46,6 @@ public class PharmacyManagementSystem extends Application {
         stage.setTitle("Pharmacy Management System");
         stage.setMaximized(true);
         stage.getIcons().add(new Image("images/pharma logo.png"));
-        stage.setOpacity(.97);
         stage.show();
     }
 

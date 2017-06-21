@@ -64,9 +64,12 @@ public class LoginController implements Initializable, ControlledScreen {
                     System.out.println("link: " + imageLink);
                     notification = new TrayNotification("Welcome", "Logged in successfuly", NotificationType.SUCCESS);
                     notification.setAnimationType(AnimationType.POPUP);
-                    notification.showAndDismiss(Duration.seconds(3));
+                    notification.showAndDismiss(Duration.seconds(1));
                     System.out.println("Hello\n");
-                    goToManagerScreen(rs.getString("name"), user, new Image(imageLink));
+                    if(user.equals("root"))
+                        goToManagerScreen(rs.getString("name"), user, new Image(imageLink));
+                    else
+                        goToEmployeeScreen(rs.getString("name"), user, new Image(imageLink));
                     username.clear();
                     password.clear();
                     break;
@@ -76,7 +79,7 @@ public class LoginController implements Initializable, ControlledScreen {
             if(!logged){
                 notification = new TrayNotification("Wrong", "username or password", NotificationType.ERROR);
                 notification.setAnimationType(AnimationType.POPUP);
-                notification.showAndDismiss(Duration.seconds(3));
+                notification.showAndDismiss(Duration.seconds(1));
                 System.out.println("Try again\n");
             }
             
@@ -121,7 +124,14 @@ public class LoginController implements Initializable, ControlledScreen {
         ManagerController.username = username;
         ManagerController.image = image;
         PharmacyManagementSystem.mainContainer.loadScreen(PharmacyManagementSystem.managerID, PharmacyManagementSystem.managerFile);
-       myController.setScreen(PharmacyManagementSystem.managerID);
+        myController.setScreen(PharmacyManagementSystem.managerID);
     }
     
+    private void goToEmployeeScreen(String name, String username, Image image){
+        EmployeeController.name = name;
+        EmployeeController.username = username;
+        EmployeeController.image = image;
+        PharmacyManagementSystem.mainContainer.loadScreen(PharmacyManagementSystem.employeeID, PharmacyManagementSystem.employeeFile);
+        myController.setScreen(PharmacyManagementSystem.employeeID);
+    }
 }
